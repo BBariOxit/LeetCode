@@ -33,6 +33,15 @@ const containsDuplicate = function(nums) {
     }
   } return false
 }
+//cách ngu với arr
+const containsDuplicate4 = function(nums) {
+  const seen = []
+  for (let i = 0; i < nums.length; i++) {
+    if (seen.includes(nums[i])) //includes chạy từ đầu mảng đến cuối mảng nên ko tối ưu
+      return true
+    seen.push(nums[i])
+  } return false
+}
 // cách ngu tiếp theo là sử dụng sort
 const containsDuplicate2 = function(nums) {
   nums.sort((a,b) => a - b)
@@ -41,8 +50,20 @@ const containsDuplicate2 = function(nums) {
       return true
   } return false
 }
+// cách tối ưu(khôn): sử dụng set(hash set)
+const containsDuplicate3 = function(nums) {
+  const seen = new Set()
+  // for (let i of nums) // loop kiểu hiện đại 
+  for (let i = 0; i < nums.length; i++) {
+    if (seen.has(nums[i])) //method has tương tự như in trong python
+      return true
+    seen.add(nums[i])
+  } return false
+}
 
 // chạy
 nums_input = [1,2,3,1]
 console.log(containsDuplicate(nums_input))
 console.log(containsDuplicate2(nums_input))
+console.log(containsDuplicate3(nums_input))
+console.log(containsDuplicate4(nums_input))
