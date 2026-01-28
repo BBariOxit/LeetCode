@@ -31,7 +31,7 @@
 
 
 class Solution(object): # có class Solution để hệ thống chấm
-  # cách 1: Brute Force
+  # cách 1: cách ngu với Brute Force
   # Đây là cách dùng 2 vòng lặp lồng nhau (Nested Loops).
   # Vòng lặp ngoài (i): Cầm từng số một.
   # Vòng lặp trong (j): Chạy đi tìm cặp với thằng i trong đống còn lại.
