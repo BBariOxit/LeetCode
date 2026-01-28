@@ -20,10 +20,9 @@
 # 1 <= nums.length <= 105
 # -109 <= nums[i] <= 109
 
-
 class Solution(object):
-  # cách code ngu với Brute Force
-  # Dùng 2 vòng lặp lồng nhau
+  # cách 1: cách code ngu với Brute Force
+  # Logic: Dùng 2 vòng lặp lồng nhau
   # Duyệt từng phần tử, rồi lại duyệt lại mảng để tìm nó
   # Time Complexity: O(n^2)
   # Space Complexity: O(1)
@@ -34,7 +33,7 @@ class Solution(object):
           return True
     return False
   
-  # cách code của t, cũng ngu nốt
+  # cách 2: cách kiếm trong mảng mới, cũng ngu nốt
   # check in trong một cái List (mảng), thằng máy tính nó phải chạy 
   # từ đầu đến đít cái list đó để tìm xem số i có nằm trong đó không.
   # Time Complexity: O(n^2)
@@ -53,8 +52,37 @@ class Solution(object):
         newArr.append(i)
     return False
   
-
+  # cách 3: cách đỡ ngu hơn với Sorting
+  # Khi sắp xếp mảng, các số giống nhau sẽ đứng cạnh nhau
+  # Lúc này chỉ cần so sánh thằng đứng trước với thằng đứng liền sau nó là xong.
+  # Logic: Sort mảng -> Duyệt 1 lần -> So sánh nums[i] và nums[i+1]
+  # Time Complexity: O(n log n)
+  # Space Complexity: O(1) hoặc O(log n) tùy thuật toán sort
+  def containsDuplicate3(self, nums):
+    nums.sort()
+    for i in range(len(nums) -1):  # tại sao phải -1, vì đễn thằng cuối nó ko thể so sánh với thằng đứng sau nó (bởi vì có đâu mà so sánh :))
+      if nums[i] == nums[i + 1]:
+        return True
+    return False
+  
+  # cách 4: dùng Hash Set => tối ưu nhất
+  # Dùng một cái Set (Bảng băm). Đi qua từng số, ném nó vào Set.
+  # Trước khi ném thì ngó xem trong Set có nó chưa. Check trong Set chỉ tốn O(1) thôi (tức thì).
+  # Time Complexity: O(n)
+  # Space Complexity: O(n)
+  # tính ra ko khác gì với cách dùng mảng, nhưng mà tối ưu hơn với hash set
+  def containsDuplicate4(self, nums):
+    seen = set()
+    for i in nums:
+      if i in seen:
+        return True
+      seen.add(i)
+    return False
+  
 # chạy
 sol = Solution()
 nums_input = [1,2,3,4]
 print(sol.containsDuplicate(nums_input))
+print(sol.containsDuplicate2(nums_input))
+print(sol.containsDuplicate3(nums_input))
+print(sol.containsDuplicate4(nums_input))
