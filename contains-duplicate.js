@@ -60,10 +60,15 @@ const containsDuplicate3 = function(nums) {
     seen.add(nums[i])
   } return false
 }
+// cách siu ngắn gọn: SS
+const containsDuplicate5 = function(nums) {
+  return new Set(nums).size !== nums.length 
+}
 
 // chạy
-nums_input = [1,2,3,1]
+nums_input = [1,2,3,4]
 console.log(containsDuplicate(nums_input))
 console.log(containsDuplicate2(nums_input))
 console.log(containsDuplicate3(nums_input))
 console.log(containsDuplicate4(nums_input))
+console.log(containsDuplicate5(nums_input))

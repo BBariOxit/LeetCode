@@ -68,7 +68,7 @@ class Solution(object):
   # cách 4: dùng Hash Set => tối ưu nhất
   # Dùng một cái Set (Bảng băm). Đi qua từng số, ném nó vào Set.
   # Trước khi ném thì ngó xem trong Set có nó chưa. Check trong Set chỉ tốn O(1) thôi (tức thì).
-  # Time Complexity: O(n)
+  # Time Complexity: O(n), tùy nếu trùng sớm
   # Space Complexity: O(n)
   # tính ra ko khác gì với cách dùng mảng, nhưng mà tối ưu hơn với hash set
   def containsDuplicate4(self, nums):
@@ -79,10 +79,21 @@ class Solution(object):
       seen.add(i)
     return False
   
+  # cách 5: siu ngắn :D
+  # Khi ném cái list vào cái Set, thằng Set nó sẽ đá đít tất cả những thằng trùng lặp ra ngoài.
+  # Nó chỉ giữ lại các gương mặt độc nhất (unique). => rồi đem SS
+
+  # Khi gọi set(nums),thằng py nó vẫn phải chạy 1 vòng lặp ngầm bên dưới (bằng C)
+  # để duyệt qua tất cả phần tử của nums và nhét vào Set.
+  # time complexcity: O(n) luôn luôn vì nó phải duyệt hết mảng
+  # Space Complexity: O(n) luôn luôn 
+  def containsDuplicate5(self, nums):
+    return len(nums) != len(set(nums))
 # chạy
 sol = Solution()
-nums_input = [1,2,3,4]
+nums_input = [1,2,3,1]
 print(sol.containsDuplicate(nums_input))
 print(sol.containsDuplicate2(nums_input))
 print(sol.containsDuplicate3(nums_input))
 print(sol.containsDuplicate4(nums_input))
+print(sol.containsDuplicate5(nums_input))
