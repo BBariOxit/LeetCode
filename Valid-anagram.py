@@ -1,7 +1,8 @@
+from collections import Counter
 # Given two strings s and t, return true if t is an anagram of s, and false otherwise.
 
 # Example 1:
-# Input: s = "anagram", t = "nagaram"
+# Input: s = "anagram", t = "anagram"
 # Output: true
 
 # Example 2:
@@ -59,13 +60,20 @@ class Solution(object):
         return False
       count[j] -= 1
     return True
-  
+  # cách dùng thư viện
+  # Khi gọi Counter(s), bên trong Python nó thực hiện một vòng lặp for y hệt như cái Cách 2.
+  # Nó khởi tạo một cái Dictionary đặc biệt (gọi là Counter object).
+  # Nó duyệt qua từng ký tự trong chuỗi s.
+  # Nó đếm số lần xuất hiện và lưu vào Dictionary đó.
+  def isAnagram4(self, s, t):
+    return Counter(s) == Counter(t)
 
 # chạy
 sol = Solution()
-s_input = "anagram" 
-t_input = "nagaram"
+s_input = "aacc" 
+t_input = "ccac"
 print(sol.isAnagram(s_input, t_input))
 print(sol.isAnagram2(s_input, t_input))
 print(sol.isAnagram3(s_input, t_input))
+print(sol.isAnagram4(s_input, t_input))
         
