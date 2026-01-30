@@ -44,7 +44,26 @@ function isAnagram2(s,t) {
   } return true
 }
 
+// cách 3: Tối ưu bộ nhớ (Dùng Typed Array - Int32Array)
+// Logic: mapping trực tiếp ký tự vào chỉ số mảng (0 cho 'a', 1 cho 'b'...).
+// Time Complexity: O(n).
+// Space Complexity: O(1) – Mảng cố định 26 phần tử, ko tốn thêm RAM dù chuỗi dài bao nhiêu.
+// Int32Array trong JS là một dạng Typed Array, nó lưu trữ dữ liệu cực kỳ thô và sát với tầng vật lý,
+// giúp máy tính xử lý nhanh hơn cái Array thông thường.
+function isAnagram3(s,t) {
+  if (s.length != t.length) return false
+  // Tạo mảng 26 phần tử toàn số 0, đại diện cho a-z
+  const counts = new Int32Array(26)
+
+  for (let i = 0; i< s.length; i++) {
+    counts[s.charCodeAt(i) -97]++
+    counts[t.charCodeAt(i) -97]--
+  }
+  return counts.every(num => num === 0)
+}
+
 const s_input = 'anagram'
 const t_input = 'nagaram'
 console.log(isAnagram(s_input, t_input))
 console.log(isAnagram2(s_input, t_input))
+console.log(isAnagram3(s_input, t_input))
