@@ -28,7 +28,7 @@ class Solution(object):
   # Logic: Tạo hai cái từ điển để lưu số lần xuất hiện của từng ký tự. 
   # Cuối cùng so sánh xem hai cái từ điển đó có giống hệt nhau không.
   # Time Complexity: O(n) – chỉ duyệt qua chuỗi đúng một lần. Nhanh hơn hẳn cách 1
-  # Space Complexity: $O(k)$ – Với $k$ là số lượng ký tự phân biệt (tối đa 26 nếu chỉ là chữ cái thường).
+  # Space Complexity: O(k) – Với k là số lượng ký tự phân biệt (tối đa 26 nếu chỉ là chữ cái thường).
   def isAnagram2(self, s, t):
     if len(s) != len(t):
       return False
