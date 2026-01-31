@@ -1,4 +1,4 @@
-## 1. Bản chất: "Kẻ hứa lèo" vĩ đại
+# Bản chất: "Kẻ hứa lèo" vĩ đại
 cứ tưởng tượng thế này:
 - List Comprehension ([]): Là một thằng đầu bếp nấu sẵn 100 bát phở rồi bày ra bàn. Mày chưa kịp ăn nó đã bắt dọn chỗ để đặt 100 cái bát đó rồi. Tốn không gian kinh.
 
@@ -6,7 +6,7 @@ cứ tưởng tượng thế này:
 
 => Kết quả: Mày chỉ tốn chỗ cho đúng 1 cái bát trên bàn, thay vì 100 cái. Đó chính là sự khác biệt giữa O(n) space và O(1) space (về mặt lưu trữ phần tử).
 
-## Cú pháp và sự ảo diệu của bộ nhớ
+# Cú pháp và sự ảo diệu của bộ nhớ
 Nhìn cái ví dụ này để thấy sự khác biệt về "độ nặng":
 
 import sys
@@ -19,7 +19,7 @@ print(sys.getsizeof(gen_exp))  => Nặng khoảng 112 bytes (Đéo bằng một 
 
 => 1 triệu phần tử mà cái Generator nó nặng có 112 bytes. Tại sao? Vì nó ko chứa phần tử nào cả, nó chỉ chứa thuật toán để tạo ra phần tử tiếp theo.
 
-## Cơ chế hoạt động: Giao thức Iterator
+# Cơ chế hoạt động: Giao thức Iterator
 Thằng Generator này nó hoạt động dựa trên cơ chế next().
 Khi tạo ra nó, nó đứng ở vạch xuất phát.
 Khi gọi next(gen), nó chạy cái vòng lặp for bên trong, tìm đến thằng thỏa mãn điều kiện if, rồi yield (nhả) kết quả đó ra.
@@ -27,19 +27,19 @@ Sau đó nó đứng im tại chỗ đó, đóng băng trạng thái lại, ko c
 Khi hết hàng để nhả, nó ném ra cái lỗi StopIteration.
 Thằng "".join() viết ở trên thực chất là nó cứ liên tục gọi next() cái Generator đó để lấy từng chữ cái rồi dán vào chuỗi kết quả.
 
-## Tại sao nó lại "ngon" hơn trong bài Palindrome?
+# Tại sao nó lại "ngon" hơn trong bài Palindrome?
 Quay lại cái dòng: "".join(char.lower() for char in s if char.isalnum())
 - Nếu dùng [], Python phải: Quét s -> Lọc rác -> Tạo List sạch -> Đưa List vào join.
 - Nếu dùng (), Python làm kiểu: join bảo "Cho tao 1 chữ", Generator quét s tìm thấy chữ đầu tiên, đưa cho join. join lại bảo "Thêm chữ nữa", Generator quét tiếp từ vị trí cũ...
 
 Sự thật phũ phàng: Generator chỉ dùng được `MỘT LẦN`. Mày mà dùng nó để duyệt qua một lần rồi, muốn dùng lại thì phải tạo cái mới. Nó ko lưu lại gì đâu, giống như tờ giấy nháp dùng xong là vứt ấy.
 
-## Khi nào dùng cái nào?
-# List Comprehension []
+# Khi nào dùng cái nào?
+## List Comprehension []
 - Tốc độ:	Nhanh hơn nếu cần duyệt đi duyệt lại nhiều lần.	
 - Bộ nhớ:	Tốn RAM kinh.	
 - Tính chất: Có thể truy cập index (list[5]), dùng lại nhiều lần.
-# Generator Expression ()
+## Generator Expression ()
 - Tốc độ:	Chậm hơn một chút do overhead của việc gọi hàm.
 - Bộ nhớ:	Cực kỳ tiết kiệm.	
 - Tính chất: Chỉ đọc từ đầu đến cuối, dùng một lần là biến mất.
