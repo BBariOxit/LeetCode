@@ -46,7 +46,7 @@ const twoSum2 = function(nums, target) {
       return [obj[need], i]
     }
     obj[num] = i
-  }
+  } return []
 }
 
 const nums_input = [2,7,11,15]
