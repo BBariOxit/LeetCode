@@ -26,6 +26,12 @@ Muốn nó nằm ở đâu?
 - ^: Phải nằm ở đầu dòng.
 - $: Phải nằm ở cuối dòng.
 - \b: Ranh giới từ (Word boundary - giúp tìm đúng chữ "an" chứ ko phải chữ "an" trong "banana").
+
+`lưu ý`:
+- /^abc/: Chuỗi phải bắt đầu bằng "abc".
+- /[abc]/:	Tìm thằng 'a' hoặc 'b' hoặc 'c'.
+- /[^abc]/:	Tìm bất cứ thằng nào TRỪ 'a', 'b', 'c'.
+- /[a^bc]/: Tìm 'a', '^', 'b', hoặc 'c'. (Lúc này nó mất phép thuật, chỉ là ký tự mũ bình thường).
 ## D. Nhóm Gom cụm & Hoặc (Grouping & Alternation)
 - |: Phép HOẶC. Ví dụ: (mèo|chó|lợn).
 - `()``: Gom nhóm lại để áp dụng định lượng hoặc trích xuất dữ liệu sau này.
@@ -54,3 +60,4 @@ Flag:
 - Readability (Độ đọc hiểu): Một cái Regex phức tạp nhìn ko khác gì đống cứt mèo. Thằng viết sau 2 tuần nhìn lại cũng ko hiểu mình viết gì.
 - Performance (Hiệu năng): Như đã nói, Catastrophic Backtracking có thể làm CPU nhảy lên 100% và treo server nếu pattern quá ngu.
 - Đừng dùng Regex cho HTML/XML: HTML nó có cấu trúc cây phức tạp, Regex ko đủ trình để xử lý mấy cái thẻ lồng nhau vô tận đâu. Dùng thư viện chuyên dụng như BeautifulSoup (Python) hay DOMParser (JS) đi.
+
