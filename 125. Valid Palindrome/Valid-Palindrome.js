@@ -49,7 +49,37 @@ const isPalindrome2 = (s) => {
     }
   } return true
 }
+// cách 3: đỉnh cao với Two Pointers - No Regex, nhưng vẫn có cái xịn hơn :D
+// Logic:
+// Dùng hai con trỏ left và right.
+// Viết một hàm phụ để check xem ký tự có phải là chữ/số không (dùng mã ASCII cho nó nhanh).
+// Bỏ qua rác và so sánh.
+// Time: O(n) - Duyệt đúng một vòng.
+// Space: O(1) - Tuyệt phẩm! Ko tốn thêm bộ nhớ cho chuỗi phụ.
+const isPalindrome3 = (s) => {
+  let i = 0
+  let j = s.length - 1
+
+  const isAlnum = (char) => {
+    const code = char.charCodeAt(0)
+    return (code >= 48 && code <= 57) || (code >= 65 && code <= 90) || (code >= 97 && code <= 122)
+    // 0-9    A-Z     a-z
+  }
+  while (i < j) {
+    while (i < j && !isAlnum(s[i])) i++
+    while (i < j && !isAlnum(s[j])) j--
+    if (s[i].toLowerCase() !== s[j].toLowerCase()) {
+      return false
+    }
+    i++
+    j--
+  } return true
+}
+// cách 4:
+
+
 //chạy
-const s = " "
+const s = "race a car"
 console.log(isPalindrome(s))
 console.log(isPalindrome2(s))
+console.log(isPalindrome3(s))
