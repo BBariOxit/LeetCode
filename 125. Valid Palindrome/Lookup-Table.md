@@ -49,3 +49,10 @@ for(let i=0; i<256; i++) {
 if (lut[s.charCodeAt(i)]) { 
     // Nhảy thẳng tới ô nhớ, tốc độ bàn thờ!
 }
+
+## Tại sao dùng Uint8Array cho cái Lookup Table?
+- Tiết kiệm RAM kinh khủng: Một mảng [] chứa 128 số có thể ngốn vài KB. Một Uint8Array(128) chỉ tốn đúng 128 bytes. ko hơn, ko kém.
+
+- Tốc độ bàn thờ: Vì nó lưu liên tục trong RAM, CPU của mày có thể đọc một lúc cả cụm phần tử vào Cache. Truy cập vào isAlnum[code] lúc này nhanh ko khác gì dùng ngôn ngữ C hay C++.
+
+- ko có Garbage Collection (GC) làm phiền: Dùng mảng thường mà cứ tạo rồi xóa liên tục là thằng GC của JS sẽ nhảy vào dọn dẹp, làm lag máy. Typed Array ổn định hơn nhiều.
