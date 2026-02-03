@@ -32,3 +32,20 @@ Vừa chạy vừa điền vào bảng. Cái gì tính rồi thì lưu lại, l�
 - Cần hiệu năng cực cao: Trong Game Engine, xử lý tín hiệu số
 - Hàm tính toán quá nặng: Ví dụ cần tính căn bậc hai của 10.000 số thường xuyên, hãy tính sẵn rồi nhét vào bảng.
 
+## Ví dụ thực tế: Check ký tự Alphanumeric
+- Khi ko dùng LTU
+function isAlnum(char) {
+  return /[a-z0-9]/i.test(char)
+  // Chậm vì khởi động máy ảo Regex
+}
+- Cách dùng Lookup Table
+const lut = new Uint8Array(256); // Tạo bảng cho toàn bộ 256 ký tự ASCII mở rộng
+for(let i=0; i<256; i++) {
+  const c = String.fromCharCode(i)
+  if (/[a-zA-Z0-9]/.test(c)) lut[i] = 1 // Đánh dấu hàng xịn là 1
+}
+
+// Lúc dùng:
+if (lut[s.charCodeAt(i)]) { 
+    // Nhảy thẳng tới ô nhớ, tốc độ bàn thờ!
+}
