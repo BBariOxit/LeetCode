@@ -75,11 +75,73 @@ const isPalindrome3 = (s) => {
     j--
   } return true
 }
-// cách 4:
+// cách 4: hard
+// Time Complexity: O(n), vẫn chỉ duyệt qua chuỗi đúng một lần. 
+// Dù có thêm Lookup Table hay toán học thì nó vẫn là tuyến tính theo độ dài n của chuỗi s.
+// Space Complexity: O(1)
+// Đừng thấy tạo cái mảng isAlnum mà tưởng là O(n). 
+// Cái mảng đó có kích thước cố định là 128, ko phụ thuộc vào độ dài chuỗi s. 
+// Trong Big O, hằng số thì coi như O(1).
 
+// 'A' là 65, 'a' là 97. Chênh lệch: 97 - 65 = 32.'B' là 66, 'b' là 98. Chênh lệch: 98 - 66 = 32.
+// Quy luật: Hiệu số giữa chữ hoa và chữ thường luôn là 32.
 
-//chạy
-const s = "race a car"
+// luồng chạy:
+// Tiền xử lý: Tạo mảng isAlnum đánh dấu sẵn thằng nào là "hàng xịn".
+// Hai con trỏ: i chạy từ đầu, j chạy từ cuối.
+// Lọc rác siêu tốc: Dùng isAlnum[s.charCodeAt(i)] để nhảy qua dấu cách, dấu phẩy... mà ko cần Regex.
+// So sánh "lười":
+// Nếu mã ASCII giống hệt nhau (codeI === codeJ) -> Quá tốt, bước tiếp.
+// Nếu khác nhau -> Kiểm tra xem có phải là một cặp Hoa-Thường không (dùng hiệu số 32).
+// Nếu ko phải nữa thì return false luôn.
+// Kết thúc: Nếu i >= j mà chưa thấy gì sai -> return true.
+const isAlnum2 = new Uint8Array(128)
+  for (let i = 48; i <= 57; i++) 
+    isAlnum2[i] = 1
+  for (let i = 65; i <= 90; i++) 
+    isAlnum2[i] = 1
+  for (let i = 97; i <= 122; i++) 
+    isAlnum2[i] = 1
+
+const isPalindrome4 = (s) => {
+  let i = 0, j = s.length -1
+
+  while (i < j) {
+    // lấy chỉ số ASCII của thằng đầu và cuối chuỗi
+    let codeI = s.charCodeAt(i)
+    let codeJ = s.charCodeAt(j)
+
+    // bỏ qua rác với lookup
+    if (!isAlnum2[codeI]) {
+      i++
+      continue
+    }
+    if (!isAlnum2[codeJ]) {
+      j--
+      continue
+    }
+
+    // So sánh: Nếu không giống hệt thì mới bắt đầu xử lý chữ hoa/thường
+    if (codeI !== codeJ) {
+      // Check xem có phải là cùng một chữ nhưng khác case không
+      // Trick: Chênh lệch giữa 'A' và 'a' là 32
+      if (codeI >= 65 && codeJ >= 65) {//vì 65 là bắt đầu của chữ A...
+        if (Math.abs(codeI - codeJ) !== 32) return false
+      }
+      // Chỉ áp dụng cho chữ cái, ko áp dụng cho số (nên check thêm)
+      else {
+        return false
+      }
+    }
+
+    i++
+    j--
+  } return true
+}
+
+// //chạy
+const s = "A man, a plan, a canal: Panama"
 console.log(isPalindrome(s))
 console.log(isPalindrome2(s))
 console.log(isPalindrome3(s))
+console.log(isPalindrome4(s))
