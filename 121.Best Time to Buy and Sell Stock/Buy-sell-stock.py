@@ -51,7 +51,22 @@ def maxProfit2(prices):
     j += 1
   return maxP
 
+# cách 3: tối ưu với One Pass / Dynamic Programming
+# Logic: Vừa đi vừa "nhặt" giá thấp nhất. duy trì một biến min_price là cái giá rẻ nhất từng thấy từ đầu mảng đến giờ.
+# Với mỗi bước, tính xem nếu bán ở giá hiện tại thì lãi bao nhiêu so với min_price đó, rồi cập nhật max_profit.
+# Time Complexity: O(n). Duyệt một vòng, nhanh
+# Space Complexity: O(1). Tốn đúng 2 biến min_price và max_profit.
+def maxProfit3(prices):
+  minP = float('inf')
+  maxP = 0
+  for i in prices:
+    if i < minP:
+      minP = i
+    elif i - minP > maxP:
+      maxP = i - minP
+  return maxP
 # chạy
-prices_input = [7,1,5,3,6,4]
+prices_input = [7,6,4,3,1]
 print(maxProfit(prices_input))
 print(maxProfit2(prices_input))
+print(maxProfit3(prices_input))
