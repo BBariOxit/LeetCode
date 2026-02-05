@@ -26,7 +26,7 @@ def moveZeroes(nums):
     nums.remove(0)
     nums.append(0)
 
-# biết tư duy chút với Ghi đè - Overwrite
+# cách 2: biết tư duy chút với Ghi đè - Overwrite
 # Logic: Dùng một biến pos để đánh dấu vị trí cần điền số khác 0. 
 # Điền xong thì phần còn lại của mảng chắc chắn là số 0.
 # Time Complexity: O(n) (Duyệt mảng 2 lần độc lập, vẫn là tuyến tính).
@@ -39,6 +39,18 @@ def moveZeroes2(nums):
       pos += 1
   for i in range(pos, len(nums)):
     nums[i] = 0
+
+# cách 3: đỉnh cao với swap - hoán vị
+# Logic: Duyệt qua mảng, hễ thấy số khác 0 thì "đá" nó về phía đầu mảng (vị trí pos) bằng cách swap.
+# Số 0 sẽ tự động bị đẩy dần về cuối.
+# Time Complexity: O(n) (Duyệt đúng 1 lần duy nhất).
+# Space Complexity: O(1).
+def moveZeroes3(nums):
+  pos = 0
+  for i in range(len(nums)):
+    if nums[i] != 0:
+      nums[pos], nums[i] = nums[i], nums[pos] 
+      pos += 1
 # chạy
 nums = [0,1,0,3,12]
 moveZeroes(nums)
@@ -47,3 +59,7 @@ print(nums)
 nums2 = [0,1,0,3,12]
 moveZeroes2(nums2)
 print(nums2)
+
+nums3 = [0,1,0,3,12]
+moveZeroes3(nums3)
+print(nums3)
