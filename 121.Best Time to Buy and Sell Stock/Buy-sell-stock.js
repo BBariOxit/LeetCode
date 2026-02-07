@@ -48,12 +48,28 @@ const maxProfit2 = (s) => {
     else {
       let profit = s[j] - s[i]
       maxP = Math.max(maxP, profit) 
+    } j ++
+  } return maxP
+}
+
+// cách 3: one pass/ dp Minimalist
+// Logic: Vừa đi vừa cập nhật cái giá thấp nhất (minPrice) và cái lãi cao nhất (maxP).
+// Time Complexity: O(n).
+// Space Complexity: O(1).
+const maxProfit3 = (s) => {
+  let minP = Infinity
+  let maxP = 0
+  for (let i of s) {
+    if (i < minP) {
+      minP = i
+    } else if (i - minP > maxP) {
+      maxP = i - minP
     }
-    j ++
   } return maxP
 }
 
 // chạy
-const s = [7,1,5,3,6,4]
+const s = [7,6,4,3,1]
 console.log(maxProfit(s))
 console.log(maxProfit2(s))
+console.log(maxProfit3(s))
