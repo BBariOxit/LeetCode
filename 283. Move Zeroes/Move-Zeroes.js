@@ -71,6 +71,18 @@ const moveZeroes4 = (s) => {
     }
   }
 }
+
+const moveZeroes5 = (s) => {
+  for (let i = 0, pos = 0; i < s.length; i++) {
+    if (s[i] !== 0) {
+      if (i !== pos) {
+        let temp = s[pos]
+        s[pos] = s[i]
+        s[i] = temp
+      } pos ++
+    }
+  }
+}
 // chạy
 let s = [0,1,0,3,12]
 moveZeroes(s)
@@ -87,3 +99,7 @@ console.log(s3)
 let s4 = [0,1,0,3,12]
 moveZeroes4(s4)
 console.log(s4)
+
+let s5 = [0,1,0,3,12]
+moveZeroes5(s5)
+console.log(s5)
