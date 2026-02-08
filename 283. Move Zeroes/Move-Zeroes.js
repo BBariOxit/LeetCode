@@ -30,7 +30,9 @@ const moveZeroes = (s) => {
   }
 }
 
-// nếu đề ko yêu cầu in-place
+// cách sai yêu cầu đề, ko in-place, giải cho vui
+// Time Complexity: $O(n)$.
+// Space Complexity: $O(n)$ (Tốn thêm đống bộ nhớ cho mảng phụ).
 const moveZeroes2 = (s) => {
   let nonZ = s.filter(x => x !== 0)
   let Z = s.filter(x => x === 0)
@@ -39,7 +41,49 @@ const moveZeroes2 = (s) => {
     s[i] = result[i]
   }
 }
+
+// cách đỡ hơn với two point - overwrite
+// Logic: Dùng con trỏ pos để ghi đè, xong thì chạy while để dọn rác.
+// Time Complexity: $O(n)$.
+// Space Complexity: $O(1)$.
+const moveZeroes3 = (s) => {
+  let pos = 0
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] !== 0) {
+      s[pos++] = s[i]
+    }
+  }
+  while (pos < s.length) {
+    s[pos++] = 0
+  }
+}
+// cách tối ưu nhất với two pointer - swap
+// Logic: Dùng kỹ thuật Destructuring của ES6 để swap trong 1 dòng. 
+// Nếu i và pos trùng nhau thì ko làm gì, cực kỳ tiết kiệm thao tác ghi vào bộ nhớ.
+// Time Complexity: $O(n)$.
+// Space Complexity: $O(1)$.
+const moveZeroes4 = (s) => {
+  for (let i = 0, pos = 0; i < s.length; i++) {
+    if (s[i] !== 0) {
+      if (i !== pos) {
+        [s[pos], s[i]] = [s[i], s[pos]]
+      } pos ++
+    }
+  }
+}
 // chạy
-s = [0,1,0,3,12]
+let s = [0,1,0,3,12]
 moveZeroes(s)
 console.log(s)
+
+let s2 = [0,1,0,3,12]
+moveZeroes2(s2)
+console.log(s2)
+
+let s3 = [0,1,0,3,12]
+moveZeroes3(s3)
+console.log(s3)
+
+let s4 = [0,1,0,3,12]
+moveZeroes4(s4)
+console.log(s4)
