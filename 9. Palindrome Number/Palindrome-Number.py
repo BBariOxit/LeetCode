@@ -31,9 +31,13 @@ def isPalindrome(x):
   return False
 
 # cách 2: đỡ ngu hơn với REVERSE FULL NUMBER
+# Dùng vòng lặp bóc từng chữ số cuối của x rồi xây dựng lại reversed_num. 
+# Cuối cùng so xem nó có bằng cái số original ban đầu không.
 # Công thức: reversed_num = reversed_num * 10 + x % 10
 # reversed_num * 10: Đây là phép "dịch trái". Khi nhân 10, nó đẩy toàn bộ các chữ số hiện tại 
 # sang bên trái một hàng để nhường chỗ trống ở hàng đơn vị cho thằng mới vào.
+# Time Complexity: O(log_{10}(n)) – Vòng lặp chạy theo số lượng chữ số của x.
+# Space Complexity: O(1) – Chỉ tốn vài cái biến tạm, ko tốn thêm mảng hay chuỗi gì cả. Ngon hơn cách 1 rồi.
 def isPalindrome2(x):
   org = x
   reversed_num = 0
@@ -41,7 +45,28 @@ def isPalindrome2(x):
     reversed_num = reversed_num * 10 + x % 10
     x //= 10
   return org == reversed_num
+
+# cách 3: tối ưu nhất với REVERSE HALF NUMBER
+# Logic: chạy vòng lặp cho đến khi cái số đảo ngược reverted_num 
+# lớn hơn hoặc bằng cái số x còn lại. Lúc thì đó đã đi đến giữa số rồi.
+# Time Complexity: O(log_{10}(n)).
+# Space Complexity: O(1).
+def isPalindrome3(x):
+  if x < 0 or (x % 10 == 0 and x != 0):
+    return False
+  reversed_num = 0
+  while x > reversed_num:
+    reversed_num = reversed_num * 10 + x % 10
+    x //= 10
+  # Trường hợp số chữ số chẵn: x == reverted_num (ví dụ 1221 -> 12 == 12)
+  # Trường hợp số chữ số lẻ: x == reverted_num // 10 (ví dụ 121 -> 1 == 12 // 10)
+  return x == reversed_num or x == reversed_num // 10
 # chạy
-x = 121
+x = -121
 print(isPalindrome(x))
 print(isPalindrome2(x))
+print(isPalindrome3(x))
+
+# Trong Python, đôi khi cái "cách ngu" (dùng String) lại chạy nhanh hơn cái "cách khôn" (dùng Toán).
+# Tại sao? Vì hàm str(x) và kỹ thuật slicing [::-1] của Python được viết bằng ngôn ngữ C cực tối ưu ở tầng dưới.
+# Còn cái vòng lặp while với phép toán % và // là chạy trên tầng bytecode của Python, nên nó chậm hơn.
