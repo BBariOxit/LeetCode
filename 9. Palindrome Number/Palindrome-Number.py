@@ -30,6 +30,18 @@ def isPalindrome(x):
     return True
   return False
 
+# cách 2: đỡ ngu hơn với REVERSE FULL NUMBER
+# Công thức: reversed_num = reversed_num * 10 + x % 10
+# reversed_num * 10: Đây là phép "dịch trái". Khi nhân 10, nó đẩy toàn bộ các chữ số hiện tại 
+# sang bên trái một hàng để nhường chỗ trống ở hàng đơn vị cho thằng mới vào.
+def isPalindrome2(x):
+  org = x
+  reversed_num = 0
+  while (x > 0):
+    reversed_num = reversed_num * 10 + x % 10
+    x //= 10
+  return org == reversed_num
 # chạy
 x = 121
 print(isPalindrome(x))
+print(isPalindrome2(x))
