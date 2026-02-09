@@ -20,9 +20,13 @@
 
 # Follow up: Could you solve it without converting the integer to a string?
 
-# cách 1: 
+# cách 1: STRING CONVERSION (ngu)
+# Logic: Chuyển số thành chuỗi, sau đó dùng kỹ thuật s[::-1] để đảo ngược chuỗi và so sánh với chuỗi gốc.
+# Time Complexity: O(n) với n là số chữ số
+# Space Complexity: O(n) vì mày phải tạo ra một cái chuỗi mới chiếm bộ nhớ.
 def isPalindrome(x):
-  if x == x[::-1]:
+  s = str(x)
+  if s == s[::-1]:
     return True
   return False
 
