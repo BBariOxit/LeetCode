@@ -19,8 +19,8 @@
 
 // cách 1: splice - push
 // logic: dùng splice để cắt rồi push vào cuối. Duyệt ngược (để tránh lỗi nhảy index), thấy 0 thì cắt ra ném xuống cuối.
-// Time Complexity: $O(n^2)$ (Vòng lặp lồng trong thao tác mảng của JS).
-// Space Complexity: $O(1)$.
+// Time Complexity: O(n^2) (Vòng lặp lồng trong thao tác mảng của JS).
+// Space Complexity: O(1).
 const moveZeroes = (s) => {
   for (let i = s.length -1; i >= 0; i--) {
     if (s[i] == 0) {
@@ -31,8 +31,8 @@ const moveZeroes = (s) => {
 }
 
 // cách sai yêu cầu đề, ko in-place, giải cho vui
-// Time Complexity: $O(n)$.
-// Space Complexity: $O(n)$ (Tốn thêm đống bộ nhớ cho mảng phụ).
+// Time Complexity: O(n).
+// Space Complexity: O(n) (Tốn thêm đống bộ nhớ cho mảng phụ).
 const moveZeroes2 = (s) => {
   let nonZ = s.filter(x => x !== 0)
   let Z = s.filter(x => x === 0)
@@ -44,8 +44,8 @@ const moveZeroes2 = (s) => {
 
 // cách đỡ hơn với two point - overwrite
 // Logic: Dùng con trỏ pos để ghi đè, xong thì chạy while để dọn rác.
-// Time Complexity: $O(n)$.
-// Space Complexity: $O(1)$.
+// Time Complexity: O(n).
+// Space Complexity: O(1).
 const moveZeroes3 = (s) => {
   let pos = 0
   for (let i = 0; i < s.length; i++) {
@@ -60,8 +60,8 @@ const moveZeroes3 = (s) => {
 // cách tối ưu nhất với two pointer - swap
 // Logic: Dùng kỹ thuật Destructuring của ES6 để swap trong 1 dòng. 
 // Nếu i và pos trùng nhau thì ko làm gì, cực kỳ tiết kiệm thao tác ghi vào bộ nhớ.
-// Time Complexity: $O(n)$.
-// Space Complexity: $O(1)$.
+// Time Complexity: O(n).
+// Space Complexity: O(1).
 const moveZeroes4 = (s) => {
   for (let i = 0, pos = 0; i < s.length; i++) {
     if (s[i] !== 0) {
@@ -72,6 +72,8 @@ const moveZeroes4 = (s) => {
   }
 }
 
+// sử dụng temp cho tối ưu hơn
+// [a, b] = [b, a] nhìn thì sang nhưng nó tạo ra một cái mảng tạm ngầm bên dưới.
 const moveZeroes5 = (s) => {
   for (let i = 0, pos = 0; i < s.length; i++) {
     if (s[i] !== 0) {
