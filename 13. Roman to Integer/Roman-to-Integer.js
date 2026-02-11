@@ -107,8 +107,34 @@ const romanToInt3 = (s) => {
     obj[s[i]] < obj[s[i + 1]] ? total -= obj[s[i]] : total += obj[s[i]]
   } return total
 }
+
+// cách 4: tối ưu với duyệt ngược
+// duyệt từ phải sang trái. Tại sao? Vì ko cần phải ngó thằng bên cạnh xem nó to hay nhỏ nữa. 
+// Mà chỉ cần giữ một cái mốc "giá trị lớn nhất từng thấy".
+// Logic: Duyệt từ cuối lên. Nếu gặp thằng nhỏ hơn thằng vừa duyệt (phía bên phải nó) thì chắc chắn là phải trừ.
+// Cách này cực nhanh và sạch.
+// Time Complexity: O(n).
+// Space Complexity: O(1).
+const romanToInt4 = (s) => {
+  const obj = {
+    'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000
+  }
+  let total = 0
+  let preValue = 0
+  for (let i = s.length -1; i >= 0; i--) {
+    let currValue = obj[s[i]]
+    if (currValue < preValue) {
+      total -= currValue
+    } else {
+      total += currValue
+      preValue = currValue
+    }
+  } return total
+}
+
 // chạy
 s = "MCMXCIV"
 console.log(romanToInt(s))
 console.log(romanToInt2(s))
 console.log(romanToInt3(s))
+console.log(romanToInt4(s))
