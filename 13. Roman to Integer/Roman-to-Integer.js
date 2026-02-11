@@ -94,7 +94,21 @@ const romanToInt2 = (s) => {
   } return total
 }
 
+// cách 3: đỡ ngu hơn 2 cách trước với object/hash map
+// Logic: Dùng toán tử 3 ngôi (Ternary operator). Tra cứu giá trị trực tiếp từ Object mất O(1).
+// Time Complexity: O(n) - Với n là độ dài chuỗi (max có 15 ký tự, lo gì).
+// Space Complexity: O(1) - Cái Object sym kia cố định, đéo tăng theo đầu vào.
+const romanToInt3 = (s) => {
+  const obj = {
+    'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000
+  }
+  let total = 0
+  for (let i =0; i < s.length; i++) {
+    obj[s[i]] < obj[s[i + 1]] ? total -= obj[s[i]] : total += obj[s[i]]
+  } return total
+}
 // chạy
-s = "LVIII"
+s = "MCMXCIV"
 console.log(romanToInt(s))
 console.log(romanToInt2(s))
+console.log(romanToInt3(s))
