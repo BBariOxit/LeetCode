@@ -83,7 +83,26 @@ def romanToInt2(s):
       total += curr
   return total
 
+# cách 3: dùng dict và trick lỏ: replace
+def romanToInt3(s):
+  s = s.replace('IV', 'IIII').replace('IX', 'VIIII')
+  s = s.replace("XL", "XXXX").replace("XC", "LXXXX")
+  s = s.replace("CD", "CCCC").replace("CM", "DCCCC")
+
+  obj = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+  return sum(obj[i] for i in s)
+
+# 
+def romanToInt4(s):
+  replacements = [("IV", "IIII"), ("IX", "VIIII"), ("XL", "XXXX"), ("XC", "LXXXX"), ("CD", "CCCC"), ("CM", "DCCCC")]
+  for old, new in replacements:
+    s = s.replace(old, new)
+  obj = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+  return sum(obj[i] for i in s)
+
 # chạy
 s = "MCMXCIV"
 print(romanToInt(s))
 print(romanToInt2(s))
+print(romanToInt3(s))
+print(romanToInt4(s))
