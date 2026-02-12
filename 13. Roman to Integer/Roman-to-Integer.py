@@ -84,6 +84,10 @@ def romanToInt2(s):
   return total
 
 # cách 3: dùng dict và trick lỏ: replace
+# Logic: đây là kiểu tư duy "lách luật". Biến IV thành IIII (4 cái 1), thế là chỉ việc cộng dồn từ đầu đến cuối. 
+# ko cần if-else gì cho mệt.
+# Time Complexity: O(n) (thực tế chậm hơn tí do chạy replace nhiều lần).
+# Space Complexity: O(n) (vì tạo ra chuỗi mới sau khi replace).
 def romanToInt3(s):
   s = s.replace('IV', 'IIII').replace('IX', 'VIIII')
   s = s.replace("XL", "XXXX").replace("XC", "LXXXX")
@@ -92,7 +96,7 @@ def romanToInt3(s):
   obj = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
   return sum(obj[i] for i in s)
 
-# 
+# đổi thành dùng lặp để replace
 def romanToInt4(s):
   replacements = [("IV", "IIII"), ("IX", "VIIII"), ("XL", "XXXX"), ("XC", "LXXXX"), ("CD", "CCCC"), ("CM", "DCCCC")]
   for old, new in replacements:
@@ -100,9 +104,26 @@ def romanToInt4(s):
   obj = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
   return sum(obj[i] for i in s)
 
+# cách 4: tối ưu với duyệt ngược và dict
+# logic: Duyệt từ phải qua trái, thằng nhỏ đứng trước thằng to thì trừ.
+# Time Complexity: O(n) - Duyệt 1 lần duy nhất.
+# Space Complexity: O(1) - Dictionary có 7 phần tử cố định.
+def romanToInt5(s):
+  obj = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+  total = 0
+  pre_val = 0
+  for i in reversed(s):
+    curr = obj[i]
+    if curr < pre_val:
+      total -= curr
+    else:
+      total += curr
+      pre_val = curr
+  return total
 # chạy
 s = "MCMXCIV"
 print(romanToInt(s))
 print(romanToInt2(s))
 print(romanToInt3(s))
 print(romanToInt4(s))
+print(romanToInt5(s))
