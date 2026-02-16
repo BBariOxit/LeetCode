@@ -42,6 +42,31 @@ const longestCommonPrefix = (strs) => {
   } return res
 }
 
+// cách 2 : cũng là Vertical Scanning nhưng đỡ ngu hơn với substring
+// logic: Lấy độ dài của thằng ngắn nhất trong mảng làm giới hạn (để khỏi lỗi undefined).
+// Chạy một vòng lặp i từ 0 đến cái giới hạn đó.
+// Bên trong, chạy tiếp một vòng lặp j để soi tất cả các chuỗi còn lại.
+// Nếu thấy một thằng ko khớp, hoặc hết chuỗi nửa chừng, thì dừng ngay lập tức.
+// Cộng dồn từng ký tự khớp vào một cái biến kết quả.
+// Time Complexity: O(S) với S là tổng số ký tự. Nhưng thực tế nó thường nhanh hơn Cách 4
+// vì nó dừng ngay lập tức khi thấy một thằng "lệch pha", ko cần đợi duyệt hết chuỗi mẫu.
+// Space Complexity: O(1). ko tốn thêm giọt tài nguyên nào.
+const longestCommonPrefix2 = (strs) => {
+  if (!strs || strs.length === 0) return ""
+  for (let i = 0; i < strs[0].length; i++) {
+    let char = strs[0][i]
+    for (let j = 1; j < strs.length; j++) {
+      if (i >= strs[j].length || char !== strs[j][i]) {
+        // return strs[0].substring(0, i)
+        return strs[0].slice(0, i)
+      }
+    }
+    // Nếu chạy hết thằng đầu mà vẫn khớp hết thì nó chính là prefix
+  } return strs[0]
+}
+
+//cách 3: Horizontal Scanning
 // chạy
 let strs = ["flower","flow","flight"]
 console.log(longestCommonPrefix(strs))
+console.log(longestCommonPrefix2(strs))
