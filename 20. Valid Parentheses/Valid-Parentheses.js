@@ -66,7 +66,30 @@ const isValid2 = (s) => {
   } return stack.length === 0
 }
 
+// cách 3: tối ưu với Stack + Hash Map
+// Logic: Tương tự cách 2 nhưng dùng Object để lưu cặp. Khi gặp ngoặc đóng,
+// chỉ cần check map[char] là ra ngay thằng ngoặc mở tương ứng.
+// Time Complexity: O(n) - Tốc độ bàn thờ, duyệt 1 lần là xong.
+// Space Complexity: O(n) - Tốn thêm tí bộ nhớ cho cái Stack và cái Map (nhưng Map thì cố định 3 cặp nên ko đáng kể).
+const isValid3 = (s) => {
+  const map = {
+    ')': '(',
+    ']': '[',
+    '}': '{'
+  }
+  let stack = []
+  for (let char of s) {
+    if (map[char]) { // Nếu char là ngoặc đóng (có trong map)
+      // Lấy thằng trên cùng stack ra, nếu ko khớp thì false
+      if (stack.pop() !== map[char]) return false
+    } else { // Nếu là ngoặc mở, ném vào stack
+      stack.push(char)
+    }
+  } return stack.length === 0
+}
+
 //chạy
-s = "()[]{}"
+s = "([)]"
 console.log(isValid(s))
 console.log(isValid2(s))
+console.log(isValid3(s))
