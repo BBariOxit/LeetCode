@@ -44,6 +44,29 @@ const isValid = (s) => {
   } return s.length === 0 
 }
 
+// cách 2: ổn hơn với Stack và if-else
+// Logic: Dùng mảng làm Stack. Duyệt 1 vòng, mở thì push, đóng thì pop ra so sánh.
+// Time Complexity: O(n) - Duyệt qua chuỗi đúng 1 lần.
+// Space Complexity: O(n) - Trường hợp xấu nhất (toàn ngoặc mở) thì stack chứa hết mẹ nó chuỗi.
+const isValid2 = (s) => {
+  let stack = []
+  for (let i = 0; i < s.length; i++) {
+    let char = s[i]
+    if (char === '(' || char === '{' || char === '[') {
+      stack.push(char)
+    } else {
+      if (stack.length === 0) return false
+      let a = stack.pop()
+      if ((char === ')' && a !== '(') ||
+          (char === '}' && a !== '{') ||
+          (char === ']' && a !== '[')) {
+        return false
+      }
+    }
+  } return stack.length === 0
+}
+
 //chạy
 s = "()[]{}"
 console.log(isValid(s))
+console.log(isValid2(s))
