@@ -84,7 +84,7 @@ const longestCommonPrefix3 = (strs) => {
   } return prefix
 }
 // cách 4: sorting , ko tối ưu lắm :)))
-// Cách này khôn ở chỗ: Mày chỉ cần so thằng "nhỏ nhất" và thằng "lớn nhất" sau khi đã sắp xếp theo bảng chữ cái.
+// Cách này khôn ở chỗ: chỉ cần so thằng "nhỏ nhất" và thằng "lớn nhất" sau khi đã sắp xếp theo bảng chữ cái.
 // Cái gì chung của 2 thằng khác biệt nhất này thì chắc chắn là cái chung của cả lũ.
 // Time Complexity: O(N K log N) (Với N là số chuỗi, K là độ dài trung bình). Tốn thời gian nhất là ở cái hàm sort().
 // Space Complexity: O(1) hoặc O(K) tùy thuộc vào cách cái hàm sort() của engine V8 (NodeJS/Chrome) nó vận hành ngầm bên dưới.
