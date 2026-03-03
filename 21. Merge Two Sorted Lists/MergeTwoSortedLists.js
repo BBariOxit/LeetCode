@@ -50,6 +50,25 @@ const mergeTwoLists = (list1, list2) => {
   return dummy.next
 }
 
+// cách 2: cách Recursion
+// Logic: So sánh hai cái đầu. Thằng nào nhỏ hơn thì giữ lại, rồi gọi chính cái hàm đó để tìm thằng kế tiếp cho nó.
+// Time Complexity: O(N+M) - Duyệt mỗi node đúng 1 lần.
+// Space Complexity: O(N+M) - Nguy hiểm! Mỗi lần gọi đệ quy nó tạo một Stack frame.
+// Nếu danh sách có 10.000 node là máy báo Stack Overflow ngay lập tức.
+const mergeTwoLists2 = (list1, list2) => {
+  if (!list1) return list2
+  if (!list2) return list1
+
+  if (list1.val < list2.val) {
+    list1.next = mergeTwoLists2(list1.next, list2)
+    return list1
+  } else {
+    list2.next = mergeTwoLists2(list1, list2.next)
+    return list2
+  }
+}
+
+
 const listToArray = (head) => {
   let out = []
   while (head) {
@@ -64,3 +83,6 @@ const list1 = new ListNode(1, new ListNode(2, new ListNode(4)))
 const list2 = new ListNode(1, new ListNode(3, new ListNode(4)))
 const merged = mergeTwoLists(list1, list2)
 console.log(listToArray(merged).join('->'))
+
+const merged2 = mergeTwoLists2(list1, list2)
+console.log(listToArray(merged2).join('->'))
