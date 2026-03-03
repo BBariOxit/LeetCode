@@ -1,3 +1,4 @@
+## cách 2
 const mergeTwoLists2 = (list1, list2) => {
   if (!list1) return list2
   if (!list2) return list1
@@ -66,7 +67,7 @@ Tầng 1 nhận về 1 -> 2 -> 3 -> 4 -> 4:
 - Nối: Node(1 của l2).next = (1 -> 2 -> 3 -> 4 -> 4).
 - Return: 1 -> 1 -> 2 -> 3 -> 4 -> 4 (Đây là kết quả cuối cùng nhận được).
 
-//////////////////////////////////////////////////////////////////////////////////////
+## cách 3
 const mergeTwoLists3 = (list1, list2) => {
   let dummy = new ListNode(-1)
   let curr = dummy
