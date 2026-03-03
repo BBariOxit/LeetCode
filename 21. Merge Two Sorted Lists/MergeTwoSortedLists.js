@@ -68,6 +68,28 @@ const mergeTwoLists2 = (list1, list2) => {
   }
 }
 
+// cách 3: tối ưu nhất với Vòng Lặp & Con Trỏ (Iterative)
+// Logic: Dùng một cái dummy node làm gốc. Dùng một con trỏ curr để đi "nối dây". 
+// Thằng nào nhỏ hơn thì nối thằng đó vào. Hết một bên thì nối cái đoạn còn lại của bên kia vào luôn.
+// Time Complexity: O(N+M) - Nhanh nhất có thể.
+// Space Complexity: O(1) - Đỉnh cao! Ko tốn thêm tí RAM nào đáng kể, chỉ là thay đổi mấy cái mối nối cũ thôi.
+const mergeTwoLists3 = (list1, list2) => {
+  let dummy = new ListNode(-1)
+  let curr = dummy
+
+  while (list1 && list2) {
+    if (list1.val <= list2.val) {
+      curr.next = list1
+      list1 = list1.next
+    } else {
+      curr.next = list2
+      list2 = list2.next
+    }
+    curr = curr.next 
+  }
+  curr.next = list1 || list2
+  return dummy.next
+}
 
 const listToArray = (head) => {
   let out = []
@@ -79,10 +101,14 @@ const listToArray = (head) => {
 }
 
 // chạy (input la linked list)
-const list1 = new ListNode(1, new ListNode(2, new ListNode(4)))
-const list2 = new ListNode(1, new ListNode(3, new ListNode(4)))
-const merged = mergeTwoLists(list1, list2)
+const makeList1 = () => new ListNode(1, new ListNode(2, new ListNode(4)))
+const makeList2 = () => new ListNode(1, new ListNode(3, new ListNode(4)))
+
+const merged = mergeTwoLists(makeList1(), makeList2())
 console.log(listToArray(merged).join('->'))
 
-const merged2 = mergeTwoLists2(list1, list2)
+const merged2 = mergeTwoLists2(makeList1(), makeList2())
 console.log(listToArray(merged2).join('->'))
+
+const merged3 = mergeTwoLists3(makeList1(), makeList2())
+console.log(listToArray(merged3).join('->'))
