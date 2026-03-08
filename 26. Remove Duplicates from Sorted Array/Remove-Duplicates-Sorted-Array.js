@@ -46,6 +46,39 @@ const removeDuplicates = function(nums) {
   } return nums.length
 }
 
+// nếu đề ko yêu cầu in-place
+// Cách này tạo mảng mới, KHÔNG phù hợp với bài toán In-place
+// Logic: Nhét hết vào Set cho nó tự lọc, xong đổ ngược lại mảng cũ.
+// Time Complexity: O(n).
+// Space Complexity: O(n) (Tốn thêm bộ nhớ cho cái Set và mảng phụ).
+const removeDuplicates3 = function(nums) {
+  let unique = [...new Set(nums)]
+  for (let i = 0; i< unique.length; i++) {
+    nums[i] = unique[i]
+  } return unique.length
+}
+
+// cách tối ưu nhất với two pointer
+// Logic: Chỉ ghi đè khi thấy số khác biệt. Ko quan tâm bọn trùng lặp phía sau.
+// Time Complexity: O(n) (Chạy đúng một mạch từ đầu tới cuối).
+// Space Complexity: O(1) (Ko tốn thêm mảng hay object nào, dùng đúng biến chạy).
+const removeDuplicates2 = function(nums) {
+  if (nums.length === 0) return 0
+  let i = 0
+  for (let j =1; j < nums.length; j++) {
+    if (nums[j] !== nums[i]) {
+      i++
+      nums[i] = nums[j]
+    }
+  }
+  return i + 1
+}
+
+
+
+
 // chạy
 nums = [1,1,2]
 console.log(removeDuplicates(nums))
+console.log(removeDuplicates2(nums))
+console.log(removeDuplicates3(nums))
