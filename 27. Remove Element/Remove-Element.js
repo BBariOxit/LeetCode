@@ -63,7 +63,24 @@ const removeElement2 = (nums, val) => {
   }
   return newArr.length
 }
+
+// cách tối ưu nhất: Two Pointers
+// Logic: Thằng i đi thám thính, thằng nào ngon thì đưa cho thằng k giữ. Kết thúc là xong
+// Time Complexity: $O(n)$. Chỉ chạy đúng một vòng for duy nhất từ đầu đến cuối. siu nhanh
+// Space Complexity: $O(1)$. ko tốn thêm cái byte nào cho mảng phụ. 
+// Đúng chuẩn "In-place" mà cái Judge nó yêu cầu.
+const removeElement3 = (nums, val) => {
+  let k = 0
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] !== val) {
+      nums[k] = nums[i]
+      k++
+    }
+  } return k
+}
+
 // chạy
 let nums = [3,2,2,3], val = 3
 console.log(removeElement(nums, val))
 console.log(removeElement2(nums, val))
+console.log(removeElement3(nums, val))
