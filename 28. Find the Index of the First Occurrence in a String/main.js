@@ -46,7 +46,24 @@ const strStr2 = function(haystack, needle) {
   } return -1
 }
 
+// Sliding Window (Dùng hàm Slice)
+// Logic: Kiểm tra từng vị trí i. Nếu đoạn con bắt đầu từ i khớp với needle, trả về i.
+// Time Complexity: O((n - m) X m) \approx O(n X m). Trong trường hợp xấu nhất (ví dụ: aaaaaab và aab)
+// Space Complexity: O(m) do hàm substring tạo ra chuỗi mới. 
+// (Nếu so sánh từng ký tự bằng vòng lặp lồng nhau thì sẽ là O(1)).
+const strStr3 = function(haystack, needle) {
+  let n = haystack.length
+  let m = needle.length
+  for (let i = 0; i <= n-m; i++) {
+    if (haystack.slice(i, i + m) === needle) {
+      return i
+    }
+  } return -1
+}
+
+
 // chạy
 let haystack = "sadbutsad", needle = "sad"
 console.log(strStr(haystack, needle))
 console.log(strStr2(haystack, needle))
+console.log(strStr3(haystack, needle))
