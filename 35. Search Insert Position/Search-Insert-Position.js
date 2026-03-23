@@ -36,11 +36,33 @@ const searchInsert = function(nums, target) {
 // Time Complexity: O(n) - Thằng findIndex bản chất vẫn là một cái vòng lặp ẩn
 // Space Complexity: O(1).
 const searchInsert2 = function(nums, target) {
-   let index = nums.findIndex(n => n >= target)
-   return index === -1 ? nums.length : index 
+  let index = nums.findIndex(n => n >= target)
+  return index === -1 ? nums.length : index 
+}
+
+// cách 3: BINARY SEARCH -> tối ưu nhất
+// Logic: Chia để trị (Divide and Conquer). Mỗi bước loại bỏ một nửa số phần tử ko liên quan.
+// Time Complexity: O(log n) - Với 1 triệu phần tử, chỉ mất khoảng 20 lần lặp.
+// So với 1 triệu lần của thằng ngu ở trên thì thấy cái nào hơn chưa?
+// Space Complexity: O(1) - Chỉ dùng vài cái biến lẻ tẻ.
+const searchInsert3 = function(nums, target) {
+  let left = 0
+  let right = nums.length - 1
+
+  while (left <= right) {
+    let mid = Math.floor(left + (right - left)/2)
+    if (nums[mid] === target) {
+      return mid
+    } else if (nums[mid] < target) {
+      left = mid + 1
+    } else {
+      right = mid - 1
+    }
+  } return left
 }
 // chay
 nums = [1,3,5,6]
 target = 5
 console.log(searchInsert(nums, target))
 console.log(searchInsert2(nums, target))
+console.log(searchInsert3(nums, target))
