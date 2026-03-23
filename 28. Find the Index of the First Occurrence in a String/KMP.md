@@ -31,5 +31,4 @@ Khi so khớp haystack với needle:
 | Con trỏ  | Phải lùi lại liên tục | Chỉ tiến lên, không bao giờ lùi |
 | Thời gian | O(n × m) | O(n + m) |
 
-
 Ví dụ thực tế: Nếu bạn tìm một đoạn DNA dài 1 triệu ký tự trong một bộ gene tỷ ký tự, KMP sẽ chạy xong trong "nốt nhạc", còn cách vét cạn có thể chạy đến sáng mai.

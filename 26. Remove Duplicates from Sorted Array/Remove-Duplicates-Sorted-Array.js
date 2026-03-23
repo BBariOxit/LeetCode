@@ -75,8 +75,6 @@ const removeDuplicates2 = function(nums) {
 }
 
 
-
-
 // chạy
 nums = [1,1,2]
 console.log(removeDuplicates(nums))
