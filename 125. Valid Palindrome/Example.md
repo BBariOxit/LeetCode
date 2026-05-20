@@ -61,7 +61,7 @@ Check:
 
 → Cả hai đều là `'a'`, khớp mẹ rồi.
 
-Đéo lọt vào khối `if`.
+Không lọt vào khối `if`.
 
 ---
 
@@ -144,7 +144,7 @@ Vòng while con của `j` tự động bị phá vỡ vì điều kiện:
 i < j
 ```
 
-đéo còn đúng nữa.
+Không còn đúng nữa.
 
 ---
 
@@ -167,7 +167,7 @@ s[2] và s[2]
 
 ---
 
-Giống nhau 100%, đéo `return false`.
+Giống nhau 100%, Không `return false`.
 
 Cập nhật cuối vòng lặp:
 
@@ -197,7 +197,7 @@ Bây giờ:
 3 < 1
 ```
 
-là Sai bét lòi.
+là Sai bét.
 
 ---
 
